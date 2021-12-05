@@ -1,0 +1,31 @@
+{
+  "name": "@aahlw/apurijoho",
+  "version": "1.0.0",
+  "description": "",
+  "author": {
+    "name": "ahlw",
+    "email": "admin@ahlw.dev"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "url": "https://github.com/aahlw/apurijoho.git"
+  },
+  "bugs": {
+    "url": "https://github.com/aahlw/apurijoho/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cheerio": "^1.0.0-rc.10"
+  },
+  "keywords": [
+    "apple",
+    "ios",
+    "ipad",
+    "mac",
+    "app store"
+  ]
+}
