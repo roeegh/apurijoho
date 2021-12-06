@@ -3,32 +3,42 @@ const { load } = require('cheerio');
 const { default: { get } } = require('axios');
 
 /**
+ * This function parses and fetches wanted field data.
+ * 
+ * @name fetch
+ * @param {Number} [index] The index of parsed data that is requested.
+ * @param {String} [split] A string to parse data with, fallback to newline character.
+ * @return {String} The requested field data.
+ */
+
+Object.prototype.fetch = function (index, split) { return this.text()?.trim()?.split(split ?? '\n')[index]?.trim() }
+
+/**
  * @async
  * @returns {Promise} An object containing app data from the App Store.
 **/
 
 async function getApp(url) {
+    let time = new Date()
     return new Promise(async (resolve, reject) => {
-        const { data } = await get(url), $ = load(data);
+        const { data } = await get(url), $ = load(data), ss = $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source');
 
         try {
             const appInfo = {
-                name: $('.app-header__title').text().trim().split('\n')[0],
-                tagline: $('.app-header__subtitle').text().trim().split('\n')[0],
-                seller: $('.app-header__identity').text().trim().split('\n')[0],
-                category: $('.information-list__item__definition').text().trim().split('\n')[3].trim(),
-                description: $('.section__description').text().trim().split('\n')[5].trim(),
-                price: $('.app-header__list__item--price').text(),
-                rating: $('.we-customer-ratings__averages__display').text(),
-                size: $('.information-list__item__definition').text().trim().split('\n')[1].trim(),
-                latestVersion: $('.whats-new__latest__version').text().trim().split(' ')[1],
-                whatsNew: $('.whats-new__content').text().trim().split('\n')[8].trim(),
-                screenshots: []
+                url,
+                name: $('.app-header__title').fetch(0),
+                tagline: $('.app-header__subtitle').fetch(0),
+                developer: $('.app-header__identity').fetch(0),
+                category: $('.information-list__item__definition').fetch(3),
+                description: $('.section__description').fetch(5),
+                price: $('.app-header__list__item--price').fetch(0),
+                rating: parseFloat($('.we-customer-ratings__averages__display').fetch(0)),
+                size: $('.information-list__item__definition').fetch(1),
+                version: $('.whats-new__latest__version').fetch(1, ' '),
+                updates: $('.whats-new__content').fetch(8),
+                screenshots: Object.keys(ss).filter(n => Number.isInteger(parseInt(n))).map(index => ss.get(index).attribs.srcset.match(/(1286|460)x0w\.webp 2x/g)?.some(e => e) ? ss.get(index).attribs.srcset.split(' ')[2] : null).filter(e => e),
+                ping: new Date() - time
             };
-
-            $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source').each((i, elm) => {
-                (elm.attribs.srcset.endsWith('1286x0w.webp 2x') || elm.attribs.srcset.endsWith('460x0w.webp 2x')) ? appInfo.screenshots.push(elm.attribs.srcset.split(' ')[2]) : null
-            });
 
             resolve(appInfo);
         } catch (_) {
@@ -43,4 +53,4 @@ async function getApp(url) {
 **/
 
 module.exports = getApp;
-module.exports.getFact = getApp;
+module.exports.getApp = getApp;
