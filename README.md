@@ -64,7 +64,7 @@ const getApp = require('apurijoho');
   version: '1.43.0', // Latest version of the app.
   updates: "What's new:• Improved user...", // Changelog of the latest version.
   screenshots: ['https://...'], // Array of screenshots for the app.
-  ping: 2039 // Scrape and parse process time (MS)
+  ping: 2039 // Scrape and parse process time (MS).
 }
 ```
 
@@ -105,7 +105,7 @@ const { getApp } = require('apurijoho');
                   { name: 'Size', value: data.size },
                   { name: 'Version', value: data.version },
                   { name: 'Updates', value: data.updates },
-                ],
+                ]
               }]
         });
     }
