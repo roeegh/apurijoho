@@ -50,7 +50,7 @@ async function getApp(url) {
         }
     });
 }
-
+ 
 /**
  * A module to fetch app data from the official Apple App Store website.
  * @exports getApp()
