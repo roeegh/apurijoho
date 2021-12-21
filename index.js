@@ -21,9 +21,8 @@ Object.prototype.fetch = function (index, split) { return this.text()?.trim()?.s
 async function getApp(url) {
     let time = new Date()
     return new Promise(async (resolve, reject) => {
-        const { data } = await get(url), $ = load(data), ss = $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source');
-
         try {
+            const { data } = await get(url), $ = load(data), ss = $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source');
             const appInfo = {
                 url,
                 name: $('.app-header__title').fetch(0),
