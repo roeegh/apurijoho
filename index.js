@@ -22,8 +22,10 @@ async function getApp(url) {
     let time = new Date()
     return new Promise(async (resolve, reject) => {
         try {
-            const { data } = await get(url), $ = load(data), ss = $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source');
-            const appInfo = {
+            const { data } = await get(url).catch(() => reject(new Error('Invalid Appstore Link'))),
+            $ = load(data), 
+            ss = $('.we-screenshot-viewer__screenshots-list li').find('.we-artwork__source'),
+            appInfo = {
                 url,
                 name: $('.app-header__title').fetch(0),
                 tagline: $('.app-header__subtitle').fetch(0),
@@ -45,7 +47,7 @@ async function getApp(url) {
 
             resolve(appInfo);
         } catch (_) {
-            reject({ error: 'An error occurred while retrieving app data. If the issue persists, please contact the developer.' });
+            reject(new Error('An error occurred while retrieving app data. If the issue persists, please contact the developer.'));
         }
     });
 }
