@@ -7,7 +7,7 @@
 ## Install
 
 ```
-$ npm install apurijoho
+$ npm install @aahlw/apurijoho
 ```
 
 ## Import
@@ -15,9 +15,9 @@ $ npm install apurijoho
 You can import the module itself or deconstruct the `getApp` function, either of the following is a vaild import:
 
 ```js
-const getApp = require('apurijoho');
+const getApp = require('@aahlw/apurijoho');
 
-const { getApp } = require('apurijoho');
+const { getApp } = require('@aahlw/apurijoho');
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ const { getApp } = require('apurijoho');
 Example code can be located in the [test.js](./test.js) file.
 
 ```js
-const getApp = require('apurijoho');
+const getApp = require('@aahlw/apurijoho');
 (async _ => console.log(await getApp('https://apps.apple.com/us/app/github/id1477376905')))();
 
 // Response:
@@ -58,18 +58,19 @@ const getApp = require('apurijoho');
     'https://is3-ssl.mzstatic.com/image/thumb/PurpleSource124/v4/4b/8f/25/4b8f259c-5885-7a9e-6f8a-61731b17540f/0fff8671-fc51-4916-b30c-d1e3895b5ac8_iPhone_11_Pro_Max-3-FilesChanged.png/460x0w.webp'
   ],
   ping: 502
+}
 ```
 
 ## Explanation
 
 ```js
 {
-  url: 'https://...', // App URL, provided by you.
-  name: 'GitHub', // App name.
-  tagline: 'Projects, ideas, & code to go', // App tagline (Found below the app name).
+  url: // App URL, provided by you.
+  name: // App name.
+  tagline: // App tagline (Found below the app name).
   developer: {
-    name: 'GitHub', // Name of company or individual that developed the app.
-    url: 'https://...' // URL of the developer's App store page.
+    name: // Name of company or individual that developed the app.
+    url: // URL of the developer's App store page.
   },
   ageRating: '4+', // Age rating of the app.
   category: 'Developer Tools', // App store category.
@@ -87,6 +88,7 @@ const getApp = require('apurijoho');
   updates: "What's New...", // Changelog of the latest version.
   screenshots: ['https://...'], // Array of screenshots for the app.
   ping: 502 // Scrape and parse process time (MS).
+}
 ```
 
 ## Example
